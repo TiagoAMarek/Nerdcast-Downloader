@@ -1,0 +1,12 @@
+{
+  "name": "NerdCast",
+  "app_id": "ad668ca1",
+  "gulpStartupTasks": [
+    "sass",
+    "watch"
+  ],
+  "watchPatterns": [
+    "www/**/*",
+    "!www/lib/**/*"
+  ]
+}
