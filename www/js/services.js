@@ -2,7 +2,7 @@ angular.module('NerdCast.services', [])
 
 .factory('Header', function() {
     var header = {
-        name: "Nercast Downloader"
+        name: "Nerdcast Downloader"
     };
 
     return {
@@ -12,10 +12,11 @@ angular.module('NerdCast.services', [])
     }
 })
 
-.factory('Casts', function() {
+.factory('Casts', function($http) {
     // Might use a resource here that returns a JSON array
 
     // Some fake testing data
+    var PUBLIC = {};
     var casts = [{
         id: 0,
         name: 'Ben Sparrow',
@@ -28,20 +29,30 @@ angular.module('NerdCast.services', [])
         face: 'https://avatars3.githubusercontent.com/u/11214?v=3&s=460'
     }];
 
-    return {
-        all: function() {
-            return casts;
-        },
-        remove: function(cast) {
-            casts.splice(casts.indexOf(cast), 1);
-        },
-        get: function(castId) {
-            for (var i = 0; i < casts.length; i++) {
-                if (casts[i].id === parseInt(castsId)) {
-                    return casts[i];
-                }
-            }
-        return null;
-        }
+    $http.get('http://jovemnerd.com.br/categoria/nerdcast/feed/')
+    .success(function(response) {
+        console.log(response);
+    })
+    .error(function(response) {
+    });
+
+    PUBLIC.all =  function() {
+        return casts;
     };
+
+    PUBLIC.remove = function(cast) {
+        casts.splice(casts.indexOf(cast), 1);
+    };
+
+    PUBLIC.get =  function(castId) {
+        for (var i = 0; i < casts.length; i++) {
+            if (casts[i].id === parseInt(castsId)) {
+                return casts[i];
+            }
+        }
+
+        return null;
+    };
+
+    return PUBLIC;
 });
