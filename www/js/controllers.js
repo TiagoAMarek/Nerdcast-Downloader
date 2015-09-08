@@ -1,6 +1,13 @@
 angular.module('NerdCast.controllers', [])
 
-.controller('DashCtrl', function($scope) {})
+.controller('Header', function($scope, Header){
+    $scope.header = Header.all();
+})
+
+.controller('DashCtrl', function($scope, Casts) {
+
+    $scope.casts = Casts.all();
+})
 
 .controller('ConfigCtrl', function($scope) {
     $scope.settings = [{

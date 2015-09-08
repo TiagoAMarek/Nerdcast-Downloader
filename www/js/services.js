@@ -1,5 +1,17 @@
 angular.module('NerdCast.services', [])
 
+.factory('Header', function() {
+    var header = {
+        name: "Nercast Downloader"
+    };
+
+    return {
+        all: function() {
+            return header;
+        }
+    }
+})
+
 .factory('Casts', function() {
     // Might use a resource here that returns a JSON array
 
@@ -18,10 +30,10 @@ angular.module('NerdCast.services', [])
 
     return {
         all: function() {
-            return chats;
+            return casts;
         },
         remove: function(cast) {
-            chats.splice(chats.indexOf(chat), 1);
+            casts.splice(casts.indexOf(cast), 1);
         },
         get: function(castId) {
             for (var i = 0; i < casts.length; i++) {
