@@ -5,8 +5,12 @@ angular.module('NerdCast.controllers', [])
 })
 
 .controller('DashCtrl', function($scope, Casts) {
-
-    $scope.casts = Casts.all();
+    new Promise( function (resolve, reject) {
+            Casts.request(resolve, reject);
+        })
+    .then(function(data){
+        $scope.casts = data;
+    });
 })
 
 .controller('ConfigCtrl', function($scope) {
