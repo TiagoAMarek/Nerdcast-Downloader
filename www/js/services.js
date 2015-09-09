@@ -12,24 +12,25 @@ angular.module('NerdCast.services', [])
     }
 })
 
-.factory('Casts', function($http) {
+.factory('Casts', function($http, $window) {
     // Might use a resource here that returns a JSON array
 
     // Some fake testing data
     var PUBLIC = {};
     var casts = [{
-        id: 0,
-        name: 'Ben Sparrow',
-        lastText: 'You on your way?',
-        face: 'https://pbs.twimg.com/profile_images/514549811765211136/9SgAuHeY.png'
-    }, {
-        id: 1,
-        name: 'Max Lynx',
-        lastText: 'Hey, it\'s me',
-        face: 'https://avatars3.githubusercontent.com/u/11214?v=3&s=460'
     }];
 
-    $http.get('http://jovemnerd.com.br/categoria/nerdcast/feed/')
+    $http.get('http://localhost:8100/index.xml',
+        {
+            transformResponse:function(data) {
+                // convert the data to JSON and provide
+                // it to the success function below
+                var x2js = new X2JS();
+                var json = x2js.xml_str2json( data );
+                return json;
+            }
+        }
+    )
     .success(function(response) {
         console.log(response);
     })
