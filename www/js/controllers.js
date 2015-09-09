@@ -1,20 +1,24 @@
-angular.module('NerdCast.controllers', [])
+(function(){
+    'use strict';
 
-.controller('Header', function($scope, Header){
-    $scope.header = Header.all();
-})
+    angular.module('NerdCast.controllers', [])
 
-.controller('DashCtrl', function($scope, Casts) {
-    new Promise( function (resolve, reject) {
-            Casts.request(resolve, reject);
-        })
-    .then(function(data){
-        $scope.casts = data;
+    .controller('Header', function($scope, Header){
+        $scope.header = Header.all();
+    })
+
+    .controller('DashCtrl', function($scope, Casts) {
+        new Promise( function (resolve, reject) {
+                Casts.request(resolve, reject);
+            })
+        .then(function(data){
+            $scope.casts = data;
+        });
+    })
+
+    .controller('ConfigCtrl', function($scope) {
+        $scope.settings = [{
+            enableFriends: true
+        }];
     });
-})
-
-.controller('ConfigCtrl', function($scope) {
-    $scope.settings = [{
-        enableFriends: true
-    }];
-});
+})();
