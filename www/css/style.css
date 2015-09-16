@@ -1,1 +1,7 @@
 /* Empty. Add your own CSS if you like */
+
+.title {
+    font-weight: bold !important;
+    color: #19191e !important;
+    text-transform: uppercase;
+}
