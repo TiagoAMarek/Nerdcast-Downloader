@@ -8,10 +8,14 @@
     })
 
     .controller('DashCtrl', function($scope, Casts) {
-        new Promise( function (resolve, reject) {
+        /*new Promise( function (resolve, reject) {
                 Casts.request(resolve, reject);
             })
         .then(function(data){
+            $scope.casts = data;
+        });*/
+        var promise = Casts.request();
+        promise.then(function(data){
             $scope.casts = data;
         });
     })
