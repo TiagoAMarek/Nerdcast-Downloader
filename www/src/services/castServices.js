@@ -1,7 +1,3 @@
-'use strict';
-
-var services = angular.module('NerdCast.services', []);
-
 /**
 * Requests the feed RSS
 */
@@ -36,16 +32,4 @@ services.factory('Casts', function($http, $q, $window) {
     };
 
     return PUBLIC;
-});
-
-services.factory('Header', function() {
-    var header = {
-        name: "Nerdcast Downloader"
-    };
-
-    return {
-        all: function() {
-            return header;
-        }
-    }
 });

@@ -8,23 +8,36 @@ var rename = require('gulp-rename');
 var sh = require('shelljs');
 
 var paths = {
-  sass: ['./scss/**/*.scss']
+    sass: ['./scss/**/*.scss'],
+    src: ['./www/src/**']
 };
 
-gulp.task('default', ['sass']);
+gulp.task('default', ['sass', 'src']);
 
 gulp.task('sass', function(done) {
-  gulp.src('./scss/ionic.app.scss')
-    .pipe(sass({
-      errLogToConsole: true
-    }))
-    .pipe(gulp.dest('./www/css/'))
-    .pipe(minifyCss({
-      keepSpecialComments: 0
-    }))
-    .pipe(rename({ extname: '.min.css' }))
-    .pipe(gulp.dest('./www/css/'))
-    .on('end', done);
+    gulp.src('./scss/ionic.app.scss')
+        .pipe(sass({
+            errLogToConsole: true
+        }))
+        .pipe(gulp.dest('./www/css/'))
+        .pipe(minifyCss({
+            keepSpecialComments: 0
+        }))
+        .pipe(rename({ extname: '.min.css' }))
+        .pipe(gulp.dest('./www/css/'))
+        .on('end', done);
+});
+
+gulp.task('src', function() {
+    var jsBuild = './www/js/';
+    gulp.src('./www/src/*.js')
+        .pipe(gulp.dest(jsBuild));
+    gulp.src(['./www/src/controllers/module.js', './www/src/controllers/*.js'])
+        .pipe(concat('controllers.js'))
+        .pipe(gulp.dest(jsBuild));
+    gulp.src(['./www/src/services/module.js', './www/src/services/*.js'])
+        .pipe(concat('services.js'))
+        .pipe(gulp.dest(jsBuild));
 });
 
 gulp.task('watch', function() {
