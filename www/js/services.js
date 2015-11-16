@@ -7,11 +7,12 @@ var services = angular.module('NerdCast.services', []);
 */
 services.factory('Casts', function($http, $q, $window) {
 
-    var PUBLIC = {};
+    var PUBLIC = {},
+        casts  = {};
 
     PUBLIC.request = function request () {
         return $q(function(resolve, reject) {
-            $http.get('http://localhost:8100/index.xml',{
+            $http.get('http://10.1.1.241:8100/index.xml',{
                 transformResponse:function(data) {
                     // convert the data to JSON and provide
                     // it to the success function below
@@ -21,7 +22,8 @@ services.factory('Casts', function($http, $q, $window) {
                 }
             }).success(function(response) {
                 if(typeof response === 'object') {
-                    resolve(response.rss.channel.item);
+                    casts = response.rss.channel.item;
+                    resolve(casts);
                 } else {
                     reject(response);
                 }
@@ -30,6 +32,18 @@ services.factory('Casts', function($http, $q, $window) {
                 reject(response);
             });
         });
+    };
+
+    PUBLIC.search = function search (find) {
+        var found = [];
+        if(casts){
+            for (var i = 0; i < casts.length; i++) {
+                if(casts[i].title.indexOf(find)!== -1){
+                    found.push(casts[i]);
+                }
+            }
+        }
+        return found;
     };
 
     return PUBLIC;

@@ -45,12 +45,12 @@ app.config(function($stateProvider, $urlRouterProvider) {
         }
     })
 
-    .state('tab.config', {
-        url: '/config',
+    .state('tab.search', {
+        url: '/search',
         views: {
-            'tab-config': {
-                templateUrl: 'templates/tab-config.html',
-                controller: 'ConfigCtrl'
+            'tab-search': {
+                templateUrl: 'templates/tab-search.html',
+                controller: 'SearchCtrl'
             }
         }
     });
