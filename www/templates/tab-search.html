@@ -3,8 +3,24 @@
         <div class="list list-inset">
             <label class="item item-input">
                 <i class="icon ion-search placeholder-icon"></i>
-                <input type="text" placeholder="Busca">
+                <input type="text" id="search" placeholder="Busca" ng-keyup="keyPress(e)">
             </label>
         </div>
+        <ion-list>
+            <ion-item ng-repeat="cast in founds">
+                <div class="list card">
+                    <div class="item item-divider">{{cast.title}}</div>
+                    <div class="item item-body">
+                        <div>
+                            {{cast.subtitle.__text}}
+                        </div>
+                        <br>
+                        <a href="{{cast.enclosure._url}}"><button class="button button-positive">
+                            Download
+                        </button></a>
+                    </div>
+                </div>
+            </ion-item>
+        </ion-list>
     </ion-content>
 </ion-view>

@@ -6,7 +6,6 @@ controllers.controller('DashCtrl', function($scope, Casts) {
     var promise = Casts.request();
     promise.then(function(data){
         $scope.casts = data;
-        console.log(data);
     });
 });
 
@@ -15,6 +14,8 @@ controllers.controller('Header', function($scope, Header){
 });
 
 controllers.controller('SearchCtrl', function($scope, Casts) {
-    $scope.found = Casts.search('Profissão');
-    console.log($scope.found);
+    var search = document.getElementById("search");
+    $scope.keyPress = function keyPress (e) {
+        $scope.founds = Casts.search(search.value);
+    }
 });

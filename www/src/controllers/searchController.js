@@ -1,4 +1,6 @@
 controllers.controller('SearchCtrl', function($scope, Casts) {
-    $scope.found = Casts.search('Profissão');
-    console.log($scope.found);
+    var search = document.getElementById("search");
+    $scope.keyPress = function keyPress (e) {
+        $scope.founds = Casts.search(search.value);
+    }
 });

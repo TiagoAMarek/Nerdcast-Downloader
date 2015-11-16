@@ -31,15 +31,16 @@ services.factory('Casts', function($http, $q, $window) {
     };
 
     PUBLIC.search = function search (find) {
-        var found = [];
+        var founds = [];
         if(casts){
             for (var i = 0; i < casts.length; i++) {
-                if(casts[i].title.indexOf(find)!== -1){
-                    found.push(casts[i]);
+                var title = casts[i].title.toLowerCase();
+                if(title.indexOf(find.toLowerCase()) !== -1){
+                    founds.push(casts[i]);
                 }
             }
         }
-        return found;
+        return founds;
     };
 
     return PUBLIC;
